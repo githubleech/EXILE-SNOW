@@ -2,22 +2,29 @@
 Credits:  - Razor77 - dayzgreywolf.-
 */
 
-Base temperature must be 1 or less for snow (else it's rain). To do this, edit your mission PBO's config.cpp:
+//Few more hints to get this working for those that are not so experienced:
 
-//Find 
-class Temperature
+/* Base temperature must be 1 or less for snow (else it's rain). To do this, edit your mission PBO's config.cpp: */
 
-//Will likely look somewhat like this:
+//Find this class in your config
+class Weather
+                
+//Inside you will find code somewhat like this:
 daytimeTemperature[] = {10.93,11.89,13.42,15.40,17.68,20.10,22.48,24.63,26.40,27.66,28.32,28.80,28.80,28.32,27.66,26.40,24.63,22.48,20.10,17.68,15.40,13.42,11.89,10.93,10.93};
 
 //Change that to 1 or less for snow. Here an example with +5 during day, and 1 during night. 
 daytimeTemperature[] = {1.00,1.00,1.00,1.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,5.00,2.00,2.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00};
 
+//Note in your exile_server PBO you also have a config.cpp file with defined weather. Here you have classes, and interval. Search for "class Weather", then edit
 
-//Note in your exile_server PBO you have a config.cpp file with defined weather categories listed in
-class Weather
+//Time in minutes to next weather change
+interval = 20;
 
-//You can modify and add additional classes, ie
+//If you add your own classes, ensure they are in rotation, i.e.
+keyframes[] = {"Overcast4","Overcast1","Overcast2","Sunny","Overcast5","Nasty"}; 
+
+//Add your custom classes here, i.e. 
+
         class Sunny
         {
             fogValue = 0;
@@ -101,3 +108,5 @@ class Weather
             lightnings = 0;
             rainbows = 0;
         };    
+        
+        
